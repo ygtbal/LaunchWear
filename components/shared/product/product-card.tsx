@@ -1,6 +1,6 @@
 import { Product } from "./product-types";
 import Image from "next/image";
-import { Card, CardHeader } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import Link from "next/link";
 const ProductCard = ({ product }: { product: Product }) => {
   return (
@@ -16,6 +16,20 @@ const ProductCard = ({ product }: { product: Product }) => {
           />
         </Link>
       </CardHeader>
+      <CardContent className="p-4 grid gap-4">
+        <div className="text-xs">{product.brand}</div>
+        <Link href={`/product/${product.slug}`}>
+          <h2 className="text-sm font-medium">{product.description}</h2>
+        </Link>
+        <div className="flex-between gap-4">
+          <p>{product.rating} Stars</p>
+          {product.stock > 0 ? (
+            <p className="font-bold">{product.price}</p>
+          ) : (
+            <p className="text-destructive">Out Of Stock</p>
+          )}
+        </div>
+      </CardContent>
     </Card>
   );
 };
