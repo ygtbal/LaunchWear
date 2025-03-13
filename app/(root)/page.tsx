@@ -2,9 +2,11 @@
 import ProductList from "@/components/shared/product/product-list";
 import { useEffect, useState } from "react";
 import { Product } from "@/components/shared/product/product-types";
+import LoadingPage from "../loading";
 
 const HomePage = () => {
   const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -18,10 +20,12 @@ const HomePage = () => {
       } catch (error) {
         console.error("Failed to fetch products", error);
       }
+      setLoading(false);
     };
     fetchData();
     console.log("fetching data");
   }, []);
+  if (loading) return <LoadingPage />;
   return (
     <>
       <ProductList data={products} title="Newest Arrivals" />
