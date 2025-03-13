@@ -12,7 +12,3 @@ export interface Product {
   isFeatured: boolean;
   banner: string | null;
 }
-
-export interface SampleData {
-  products: Product[];
-}
